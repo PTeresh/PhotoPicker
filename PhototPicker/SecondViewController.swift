@@ -10,37 +10,92 @@ import SnapKit
 
 final class SecondViewController: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     
-    var imageView = UIImageView()
-    var imagePicker = UIImagePickerController()
-    var imageSelected: ((UIImage) -> Void)?
+    private var imageView = UIImageView()
+    private let loadButton = UIButton()
+    private let saveButton = UIButton()
+    private let imagePicker = UIImagePickerController()
+    private let nameText = UITextField()
+    private let descriptionText = UITextField()
+    private var storage: Storage     // Зачем его добавлять, если и так все работает?
+    
+    init(storage: Storage? = nil) {
+        self.storage = storage ?? Storage.share
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         view.backgroundColor = .systemGray
         setupUI()
     }
     
     private func setupUI(){
-        imageView.frame = CGRect(x: 20, y: 100, width: view.frame.width - 40, height: 300)
+        
         imageView.contentMode = .scaleAspectFit
         imageView.backgroundColor = .white
         view.addSubview(imageView)
+        imageView.snp.makeConstraints { make in
+            make.leading.equalTo(view).offset(20)
+            make.trailing.equalTo(view).inset(20)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(50)
+            make.height.equalTo(300)
+        }
+
         
-        let loadButton = UIButton(frame: CGRect(x: 20, y: imageView.frame.maxY + 20, width: 100, height: 50))
         loadButton.setTitle("Загрузить", for: .normal)
         loadButton.backgroundColor = .systemBlue
         loadButton.setTitleColor(.white, for: .normal)
         loadButton.layer.cornerRadius = 5
         loadButton.addTarget(self, action: #selector(loadImage), for: .touchUpInside)
         view.addSubview(loadButton)
+        loadButton.snp.makeConstraints { make in
+            make.top.equalTo(imageView.snp.bottom).offset(60)
+            make.leading.equalTo(view).offset(20)
+            make.height.equalTo(40)
+            make.width.equalTo(100)
+        }
         
-        let saveButton = UIButton(frame: CGRect(x: view.frame.width - 120, y: imageView.frame.maxY + 20, width: 100, height: 50))
         saveButton.setTitle("Сохранить", for: .normal)
         saveButton.backgroundColor = .systemGreen
         saveButton.setTitleColor(.white, for: .normal)
         saveButton.layer.cornerRadius = 5
         saveButton.addTarget(self, action: #selector(saveImage), for: .touchUpInside)
         view.addSubview(saveButton)
+        saveButton.snp.makeConstraints { make in
+            make.top.equalTo(imageView.snp.bottom).offset(60)
+            make.trailing.equalTo(view).inset(20)
+            make.height.equalTo(40)
+            make.width.equalTo(100)
+        }
+        
+        nameText.placeholder = "Введите имя"
+        nameText.backgroundColor = .white
+        nameText.borderStyle = .roundedRect
+        nameText.textColor = .black
+        view.addSubview(nameText)
+        nameText.snp.makeConstraints { make in
+            make.centerX.equalTo(view)
+            make.top.equalTo(imageView.snp.bottom).offset(150)
+            make.leading.equalTo(view).offset(20)
+            make.trailing.equalTo(view).inset(20)
+        }
+        
+        descriptionText.placeholder = "Введите описание"
+        descriptionText.backgroundColor = .white
+        descriptionText.borderStyle = .roundedRect
+        descriptionText.textColor = .black
+        view.addSubview(descriptionText)
+        descriptionText.snp.makeConstraints { make in
+            make.centerX.equalTo(view)
+            make.top.equalTo(nameText.snp.bottom).offset(50)
+            make.leading.equalTo(view).offset(20)
+            make.trailing.equalTo(view).inset(20)
+        }
     }
     
     @objc private func loadImage() {
@@ -50,9 +105,29 @@ final class SecondViewController: UIViewController, UIImagePickerControllerDeleg
     }
     
     @objc private func saveImage() {
+        var shouldPopViewController = false
+        
+        if let name = nameText.text, !name.isEmpty {
+            Storage.share.name = name
+            shouldPopViewController = true
+        }
+        
+        if let description = descriptionText.text, !description.isEmpty {
+            Storage.share.description = description
+            shouldPopViewController = true
+        }
+        
         if let selectedImage = imageView.image {
-            imageSelected?(selectedImage)
+            Storage.share.image = selectedImage
+            shouldPopViewController = true
+        }
+        
+        if shouldPopViewController {
             navigationController?.popViewController(animated: true)
+        } else {
+            let alert = UIAlertController(title: "Предупреждение", message: "Необходимо заполнить хотя бы одно поле", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            present(alert, animated: true)
         }
     }
     
@@ -63,7 +138,7 @@ final class SecondViewController: UIViewController, UIImagePickerControllerDeleg
         dismiss(animated: true, completion: nil)
     }
     
-    @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+    @objc private func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
         if let error = error {
             let alert = UIAlertController(title: "Ошибка сохранения", message: error.localizedDescription, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default))

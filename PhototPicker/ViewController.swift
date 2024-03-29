@@ -7,16 +7,16 @@
 
 import UIKit
 
-final class ViewController: UIViewController {
+final class ViewController: UIViewController {    // что за вопросики справа от файлов
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemGray3
-        
+        // где лучше объявлять элементы юай
         let button1 = createButton(title: "Информация профиля", action: #selector(goToFirstVC))
         let button2 = createButton(title: "Поменять аватарку", action: #selector(goToSecondVC))
         let button3 = createButton(title: "Thrid screen", action: #selector(goToThirdVC))
-        
+        // нужно ли это все кидать в отдельную функцию
         let stackViewButtons = UIStackView(arrangedSubviews: [button1, button2, button3])
         stackViewButtons.axis = .vertical
         stackViewButtons.spacing = 20
@@ -45,15 +45,15 @@ final class ViewController: UIViewController {
     
     //MARK: - Actions
     
-    @objc func goToFirstVC () {
+    @objc private func goToFirstVC () {
         navigationController?.pushViewController(FirstViewController(), animated: true)
     }
     
-    @objc func goToSecondVC () {
+    @objc private func goToSecondVC () {
         navigationController?.pushViewController(SecondViewController(), animated: true)
     }
     
-    @objc func goToThirdVC () {
+    @objc private func goToThirdVC () {
         navigationController?.pushViewController(ThirdViewController(), animated: true)
     }
     
