@@ -11,6 +11,7 @@ import SnapKit
 final class SecondViewController: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     
     private var imageView = UIImageView()
+    private let thirdViewController = ThirdViewController()
     private let loadButton = UIButton()
     private let saveButton = UIButton()
     private let imagePicker = UIImagePickerController()
@@ -119,6 +120,7 @@ final class SecondViewController: UIViewController, UIImagePickerControllerDeleg
         
         if let selectedImage = imageView.image {
             Storage.share.image = selectedImage
+ //           thirdViewController.addPhoto(selectedImage)
             shouldPopViewController = true
         }
         

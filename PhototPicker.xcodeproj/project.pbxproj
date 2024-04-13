@@ -16,6 +16,7 @@
 		4A0764A72BAEDED000CEE078 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0764A62BAEDED000CEE078 /* SecondViewController.swift */; };
 		4A0764A92BAEDEDE00CEE078 /* ThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0764A82BAEDEDE00CEE078 /* ThirdViewController.swift */; };
 		4A0764AC2BAEF40900CEE078 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4A0764AB2BAEF40900CEE078 /* SnapKit */; };
+		4A20CFBC2BCAD54B0039A0FA /* ImageViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A20CFBB2BCAD54B0039A0FA /* ImageViewCell.swift */; };
 		4A23D0DC2BB6F8E1005F6340 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A23D0DB2BB6F8E1005F6340 /* Storage.swift */; };
 /* End PBXBuildFile section */
 
@@ -30,6 +31,7 @@
 		4A0764A42BAEDEAC00CEE078 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
 		4A0764A62BAEDED000CEE078 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		4A0764A82BAEDEDE00CEE078 /* ThirdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdViewController.swift; sourceTree = "<group>"; };
+		4A20CFBB2BCAD54B0039A0FA /* ImageViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewCell.swift; sourceTree = "<group>"; };
 		4A23D0DB2BB6F8E1005F6340 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -70,6 +72,7 @@
 				4A0764A42BAEDEAC00CEE078 /* FirstViewController.swift */,
 				4A0764A62BAEDED000CEE078 /* SecondViewController.swift */,
 				4A0764A82BAEDEDE00CEE078 /* ThirdViewController.swift */,
+				4A20CFBB2BCAD54B0039A0FA /* ImageViewCell.swift */,
 				4A0764992BAED9D100CEE078 /* Assets.xcassets */,
 				4A07649B2BAED9D100CEE078 /* LaunchScreen.storyboard */,
 				4A07649E2BAED9D100CEE078 /* Info.plist */,
@@ -158,6 +161,7 @@
 				4A0764912BAED9D000CEE078 /* AppDelegate.swift in Sources */,
 				4A0764932BAED9D000CEE078 /* SceneDelegate.swift in Sources */,
 				4A0764A72BAEDED000CEE078 /* SecondViewController.swift in Sources */,
+				4A20CFBC2BCAD54B0039A0FA /* ImageViewCell.swift in Sources */,
 				4A23D0DC2BB6F8E1005F6340 /* Storage.swift in Sources */,
 				4A0764A92BAEDEDE00CEE078 /* ThirdViewController.swift in Sources */,
 				4A0764A52BAEDEAC00CEE078 /* FirstViewController.swift in Sources */,
