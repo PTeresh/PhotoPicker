@@ -9,9 +9,8 @@ import UIKit
 
 final class ThirdViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
-    var images = Storage.share.images
     private lazy var collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-    private var layout: UICollectionViewFlowLayout = {
+    private lazy var layout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: 100, height: 100)
         layout.sectionInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
@@ -41,14 +40,14 @@ final class ThirdViewController: UIViewController, UICollectionViewDataSource, U
     //MARK: - UICollectionView DataSource
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return images.count
+        return Storage.share.images.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath) as? ImageViewCell else {
             fatalError("Unable to dequeue ImageCell")
         }
-        cell.imageView.image = images[indexPath.item]
+        cell.imageView.image = Storage.share.images[indexPath.item]
         return cell
     }
     
@@ -62,7 +61,7 @@ final class ThirdViewController: UIViewController, UICollectionViewDataSource, U
     //MARK: - AddPhoto
     
     func addPhoto(_ selectedImage: UIImage) {
-        images.append(selectedImage)
+        Storage.share.images.append(selectedImage)
         collectionView.reloadData()
     }
     
