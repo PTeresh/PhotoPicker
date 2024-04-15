@@ -120,7 +120,7 @@ final class SecondViewController: UIViewController, UIImagePickerControllerDeleg
         
         if let selectedImage = imageView.image {
             Storage.share.image = selectedImage
- //           thirdViewController.addPhoto(selectedImage)
+            thirdViewController.addPhoto(selectedImage)
             shouldPopViewController = true
         }
         

@@ -9,8 +9,17 @@ import UIKit
 
 final class ThirdViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
-    private var collectionView: UICollectionView!
-    var images: [UIImage] = [UIImage(named: "defaultPhoto")!]
+    var images = Storage.share.images
+    private lazy var collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+    private var layout: UICollectionViewFlowLayout = {
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: 100, height: 100)
+        layout.sectionInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+        layout.minimumLineSpacing = 10
+        layout.minimumInteritemSpacing = 10
+        return layout
+    }()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,18 +27,15 @@ final class ThirdViewController: UIViewController, UICollectionViewDataSource, U
     }
     
     private func setupCollectionView() {
-        let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 100, height: 100)
-        layout.sectionInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
-        layout.minimumLineSpacing = 10
-        layout.minimumInteritemSpacing = 10
-        
-        collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
+        view.addSubview(collectionView)
+        collectionView.snp.makeConstraints { make in
+            make.edges.equalTo(self.view)
+
+        }
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(ImageViewCell.self, forCellWithReuseIdentifier: "ImageCell")
         collectionView.backgroundColor = .systemGray3
-        view.addSubview(collectionView)
     }
     
     //MARK: - UICollectionView DataSource
@@ -56,7 +62,6 @@ final class ThirdViewController: UIViewController, UICollectionViewDataSource, U
     //MARK: - AddPhoto
     
     func addPhoto(_ selectedImage: UIImage) {
-        print("Adding image: \(selectedImage), images array: \(String(describing: images))")
         images.append(selectedImage)
         collectionView.reloadData()
     }
