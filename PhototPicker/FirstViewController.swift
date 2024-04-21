@@ -8,8 +8,7 @@
 import UIKit
 import SnapKit
 
-final class FirstViewController: UIViewController {    // почему так долго грузит второй экран?
-    
+final class FirstViewController: UIViewController {
     private let photo = UIImageView(image: Storage.share.image)
     private let name = UILabel()
     private let additionalInfo = UILabel()
@@ -29,7 +28,6 @@ final class FirstViewController: UIViewController {    // почему так д
     }
     
     private func setup() {
-        
         photo.contentMode = .scaleAspectFill
         name.text = Storage.share.name
         name.textColor = .black
@@ -44,13 +42,11 @@ final class FirstViewController: UIViewController {    // почему так д
     }
     
     private func circlePhoto() {
-        
         photo.layer.cornerRadius = photo.frame.width / 2
         photo.clipsToBounds = true
     }
     
     private func layout() {
-        
         view.addSubview(photo)
         view.addSubview(name)
         view.addSubview(additionalInfo)

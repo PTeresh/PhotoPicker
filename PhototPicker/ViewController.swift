@@ -15,7 +15,7 @@ final class ViewController: UIViewController {    // что за вопроси�
         // где лучше объявлять элементы юай
         let button1 = createButton(title: "Информация профиля", action: #selector(goToFirstVC))
         let button2 = createButton(title: "Поменять аватарку", action: #selector(goToSecondVC))
-        let button3 = createButton(title: "Thrid screen", action: #selector(goToThirdVC))
+        let button3 = createButton(title: "Галерея", action: #selector(goToThirdVC))
         // нужно ли это все кидать в отдельную функцию
         let stackViewButtons = UIStackView(arrangedSubviews: [button1, button2, button3])
         stackViewButtons.axis = .vertical

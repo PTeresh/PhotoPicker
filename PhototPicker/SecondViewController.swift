@@ -17,7 +17,7 @@ final class SecondViewController: UIViewController, UIImagePickerControllerDeleg
     private let imagePicker = UIImagePickerController()
     private let nameText = UITextField()
     private let descriptionText = UITextField()
-    private var storage: Storage     // Зачем его добавлять, если и так все работает?
+    private var storage: Storage
     
     init(storage: Storage? = nil) {
         self.storage = storage ?? Storage.share
@@ -33,10 +33,20 @@ final class SecondViewController: UIViewController, UIImagePickerControllerDeleg
         
         view.backgroundColor = .systemGray
         setupUI()
+        setupHideKeyboardOnTap()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        addKeyboardObservers()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        removeKeyboardObservers()
     }
     
     private func setupUI(){
-        
         imageView.contentMode = .scaleAspectFit
         imageView.backgroundColor = .white
         view.addSubview(imageView)
@@ -46,7 +56,6 @@ final class SecondViewController: UIViewController, UIImagePickerControllerDeleg
             make.top.equalTo(view.safeAreaLayoutGuide).offset(50)
             make.height.equalTo(300)
         }
-
         
         loadButton.setTitle("Загрузить", for: .normal)
         loadButton.backgroundColor = .systemBlue
@@ -152,3 +161,41 @@ final class SecondViewController: UIViewController, UIImagePickerControllerDeleg
         }
     }
 }
+
+
+extension SecondViewController: UITextFieldDelegate {
+    
+    private func addKeyboardObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
+    private func removeKeyboardObservers() {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
+    @objc private func adjustForKeyboard(notification: Notification) {
+        guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+
+        let keyboardScreenEndFrame = keyboardValue.cgRectValue
+        let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
+
+        if notification.name == UIResponder.keyboardWillHideNotification {
+            view.frame.origin.y = 0
+        } else {
+            view.frame.origin.y = -keyboardViewEndFrame.height
+        }
+    }
+    
+    private func setupHideKeyboardOnTap() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapGesture.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapGesture)
+    }
+
+    @objc private func dismissKeyboard() {
+        view.endEditing(true)
+    }
+}
+
