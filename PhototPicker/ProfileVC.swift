@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class FirstViewController: UIViewController {
+final class ProfileVC: UIViewController {
     private let photo = UIImageView(image: Storage.share.image)
     private let name = UILabel()
     private let additionalInfo = UILabel()

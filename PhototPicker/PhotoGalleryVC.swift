@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ThirdViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+final class PhotoGalleryVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     private lazy var collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
     private lazy var layout: UICollectionViewFlowLayout = {
@@ -18,8 +18,18 @@ final class ThirdViewController: UIViewController, UICollectionViewDataSource, U
         layout.minimumInteritemSpacing = 10
         return layout
     }()
-
     
+    private let storage: Storage
+    
+    init(storage: Storage? = nil) {
+            self.storage = storage ?? Storage.share
+            super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCollectionView()
@@ -61,7 +71,7 @@ final class ThirdViewController: UIViewController, UICollectionViewDataSource, U
     //MARK: - AddPhoto
     
     func addPhoto(_ selectedImage: UIImage) {
-        Storage.share.images.append(selectedImage)
+        storage.images.append(selectedImage)
         collectionView.reloadData()
     }
     

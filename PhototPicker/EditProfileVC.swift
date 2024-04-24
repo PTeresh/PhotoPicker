@@ -8,16 +8,16 @@
 import UIKit
 import SnapKit
 
-final class SecondViewController: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+final class EditProfileVC: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     
-    private var imageView = UIImageView()
-    private let thirdViewController = ThirdViewController()
+    private let imageView = UIImageView()
+    private let photoGalleryVC = PhotoGalleryVC() 
     private let loadButton = UIButton()
     private let saveButton = UIButton()
     private let imagePicker = UIImagePickerController()
     private let nameText = UITextField()
     private let descriptionText = UITextField()
-    private var storage: Storage
+    private let storage: Storage
     
     init(storage: Storage? = nil) {
         self.storage = storage ?? Storage.share
@@ -26,6 +26,10 @@ final class SecondViewController: UIViewController, UIImagePickerControllerDeleg
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func loadView() {
+        super.loadView()
     }
     
     override func viewDidLoad() {
@@ -118,18 +122,18 @@ final class SecondViewController: UIViewController, UIImagePickerControllerDeleg
         var shouldPopViewController = false
         
         if let name = nameText.text, !name.isEmpty {
-            Storage.share.name = name
+            storage.name = name
             shouldPopViewController = true
         }
         
         if let description = descriptionText.text, !description.isEmpty {
-            Storage.share.description = description
+            storage.description = description
             shouldPopViewController = true
         }
         
         if let selectedImage = imageView.image {
-            Storage.share.image = selectedImage
-            thirdViewController.addPhoto(selectedImage)
+            storage.image = selectedImage
+            photoGalleryVC.addPhoto(selectedImage)
             shouldPopViewController = true
         }
         
@@ -163,7 +167,7 @@ final class SecondViewController: UIViewController, UIImagePickerControllerDeleg
 }
 
 
-extension SecondViewController: UITextFieldDelegate {
+extension EditProfileVC: UITextFieldDelegate {
     
     private func addKeyboardObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillShowNotification, object: nil)

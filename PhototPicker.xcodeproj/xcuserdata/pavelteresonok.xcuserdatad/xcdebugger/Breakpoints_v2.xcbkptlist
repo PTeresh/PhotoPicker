@@ -14,8 +14,8 @@
             filePath = "PhototPicker/SecondViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "132"
-            endingLineNumber = "132"
+            startingLineNumber = "136"
+            endingLineNumber = "136"
             landmarkName = "saveImage()"
             landmarkType = "7">
          </BreakpointContent>
@@ -34,6 +34,102 @@
             endingLineNumber = "65"
             landmarkName = "addPhoto(_:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "690EB319-B9F9-4043-868A-57DD30FB9D4B"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PhototPicker/SecondViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "690EB319-B9F9-4043-868A-57DD30FB9D4B - e15c9bb2d04c04c1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PhototPicker.SecondViewController.viewWillAppear(Swift.Bool) -&gt; ()"
+                  moduleName = "PhototPicker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pavelteresonok/Documents/actionandaction/PhototPicker/PhototPicker/SecondViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "40"
+                  endingLineNumber = "40"
+                  offsetFromSymbolStart = "64">
+               </Location>
+               <Location
+                  uuid = "690EB319-B9F9-4043-868A-57DD30FB9D4B - cf2cf58dd18552f7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PhototPicker.SecondViewController.viewDidLoad() -&gt; ()"
+                  moduleName = "PhototPicker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pavelteresonok/Documents/actionandaction/PhototPicker/PhototPicker/SecondViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "38"
+                  endingLineNumber = "38"
+                  offsetFromSymbolStart = "140">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "28E83C4C-1452-439F-8E29-D37A2CD00504"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PhototPicker/SecondViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
+            landmarkName = "loadView()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "28E83C4C-1452-439F-8E29-D37A2CD00504 - cf2cf58dd18553b1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PhototPicker.SecondViewController.viewDidLoad() -&gt; ()"
+                  moduleName = "PhototPicker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pavelteresonok/Documents/actionandaction/PhototPicker/PhototPicker/SecondViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "32"
+                  endingLineNumber = "32"
+                  offsetFromSymbolStart = "80">
+               </Location>
+               <Location
+                  uuid = "28E83C4C-1452-439F-8E29-D37A2CD00504 - c2c7e4ac223bda9d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PhototPicker.SecondViewController.loadView() -&gt; ()"
+                  moduleName = "PhototPicker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pavelteresonok/Documents/actionandaction/PhototPicker/PhototPicker/SecondViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "32"
+                  endingLineNumber = "32"
+                  offsetFromSymbolStart = "40">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

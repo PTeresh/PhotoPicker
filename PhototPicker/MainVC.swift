@@ -7,16 +7,14 @@
 
 import UIKit
 
-final class ViewController: UIViewController {    // что за вопросики справа от файлов
+final class MainVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemGray3
-        // где лучше объявлять элементы юай
-        let button1 = createButton(title: "Информация профиля", action: #selector(goToFirstVC))
-        let button2 = createButton(title: "Поменять аватарку", action: #selector(goToSecondVC))
-        let button3 = createButton(title: "Галерея", action: #selector(goToThirdVC))
-        // нужно ли это все кидать в отдельную функцию
+        let button1 = createButton(title: "Информация профиля", action: #selector(goToProfileVC))
+        let button2 = createButton(title: "Поменять информацию", action: #selector(goToEditProfileVC))
+        let button3 = createButton(title: "Галерея", action: #selector(goToPhotoGalleryVC))
         let stackViewButtons = UIStackView(arrangedSubviews: [button1, button2, button3])
         stackViewButtons.axis = .vertical
         stackViewButtons.spacing = 20
@@ -45,16 +43,16 @@ final class ViewController: UIViewController {    // что за вопроси�
     
     //MARK: - Actions
     
-    @objc private func goToFirstVC () {
-        navigationController?.pushViewController(FirstViewController(), animated: true)
+    @objc private func goToProfileVC () {
+        navigationController?.pushViewController(ProfileVC(), animated: true)
     }
     
-    @objc private func goToSecondVC () {
-        navigationController?.pushViewController(SecondViewController(), animated: true)
+    @objc private func goToEditProfileVC () {
+        navigationController?.pushViewController(EditProfileVC(), animated: true)
     }
     
-    @objc private func goToThirdVC () {
-        navigationController?.pushViewController(ThirdViewController(), animated: true)
+    @objc private func goToPhotoGalleryVC () {
+        navigationController?.pushViewController(PhotoGalleryVC(), animated: true)
     }
     
     
