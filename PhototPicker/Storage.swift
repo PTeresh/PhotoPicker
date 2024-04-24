@@ -13,6 +13,7 @@ final class Storage {
     var image: UIImage? = UIImage(named: "defaultPhoto")
     var name: String = "none"
     var description: String = "none"
+    var images: [UIImage?] = [UIImage(named: "defaultPhoto")] 
     
     private init() {}
     

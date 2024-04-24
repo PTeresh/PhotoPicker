@@ -7,42 +7,57 @@
 
 import UIKit
 
-final class ThirdViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+final class PhotoGalleryVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
-    private var collectionView: UICollectionView!
-    var images: [UIImage] = [UIImage(named: "defaultPhoto")!]
+    private lazy var collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+    private lazy var layout: UICollectionViewFlowLayout = {
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: 100, height: 100)
+        layout.sectionInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+        layout.minimumLineSpacing = 10
+        layout.minimumInteritemSpacing = 10
+        return layout
+    }()
     
+    private let storage: Storage
+    
+    init(storage: Storage? = nil) {
+            self.storage = storage ?? Storage.share
+            super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCollectionView()
     }
     
     private func setupCollectionView() {
-        let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 100, height: 100)
-        layout.sectionInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
-        layout.minimumLineSpacing = 10
-        layout.minimumInteritemSpacing = 10
-        
-        collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
+        view.addSubview(collectionView)
+        collectionView.snp.makeConstraints { make in
+            make.edges.equalTo(self.view)
+
+        }
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(ImageViewCell.self, forCellWithReuseIdentifier: "ImageCell")
         collectionView.backgroundColor = .systemGray3
-        view.addSubview(collectionView)
     }
     
     //MARK: - UICollectionView DataSource
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return images.count
+        return Storage.share.images.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath) as? ImageViewCell else {
             fatalError("Unable to dequeue ImageCell")
         }
-        cell.imageView.image = images[indexPath.item]
+        cell.imageView.image = Storage.share.images[indexPath.item]
         return cell
     }
     
@@ -56,8 +71,7 @@ final class ThirdViewController: UIViewController, UICollectionViewDataSource, U
     //MARK: - AddPhoto
     
     func addPhoto(_ selectedImage: UIImage) {
-        print("Adding image: \(selectedImage), images array: \(String(describing: images))")
-        images.append(selectedImage)
+        storage.images.append(selectedImage)
         collectionView.reloadData()
     }
     
